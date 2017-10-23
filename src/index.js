@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Square(props) {
+const Square=(props)=> {
     return (
         <button className="square" onClick={props.onClick}>
             {props.value}
@@ -43,21 +43,19 @@ class Board extends React.Component {
     }
 }
 
-class Game extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            history: [
-                {
-                    squares: Array(9).fill(null)
-                }
-            ],
-            stepNumber: 0,
-            xIsNext: true
-        };
-    }
+class Game extends Component {
+    state = {
+        history: [
+            {
+                squares: Array(9).fill(null)
+            }
+        ],
+        stepNumber: 0,
+        xIsNext: true
+    };
 
-    handleClick(i) {
+
+    handleClick = (i) => {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
@@ -76,7 +74,7 @@ class Game extends React.Component {
         });
     }
 
-    jumpTo(step) {
+    jumpTo = (step) => {
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0
@@ -125,7 +123,7 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(<Game />, document.getElementById("root"));
+ReactDOM.render(<Game/>, document.getElementById("root"));
 
 function calculateWinner(squares) {
     const lines = [
